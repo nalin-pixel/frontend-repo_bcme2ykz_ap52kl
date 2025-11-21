@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 export default function Pricing() {
   const [spend, setSpend] = useState(10000)
@@ -52,7 +52,7 @@ function LiveTrials() {
   const [items, setItems] = useState([])
   const baseUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
 
-  useState(() => {
+  useEffect(() => {
     const load = async () => {
       try {
         const res = await fetch(`${baseUrl}/api/trials`)
@@ -61,7 +61,7 @@ function LiveTrials() {
       } catch {}
     }
     load()
-  }, [])
+  }, [baseUrl])
 
   return (
     <div className="mt-4 space-y-2">
